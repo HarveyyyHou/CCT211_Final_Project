@@ -154,14 +154,44 @@ class Random_Number:
     "Randomly selects a Number"
 
     def __init__(self):
-        self.rigged = None
+        self.rigged = []
+        self.MyNum = None
+        self.frontnum = None
+        self.endnum = None
+        self.screencontrol = False
 
+
+    def changescreen(self):
+        # if cur screen is normal.
+        if self.screencontrol==True :
+            self.get_current_values()
+            self.rigged=[]
+            self.rigfunction()
+
+        #if rig screen
+        else:
+            entrytext = self.Rigbox.get()
+            entrytext = entrytext.split(",")
+            for myint in entrytext:
+                myint = int(myint)
+                if self.front.get() == "" or self.end.get() == "":
+                    break
+                elif int(self.front.get()) <= myint <= int(self.end.get()):
+                    self.rigged.append(myint)
+                else:
+                    self.rigged = []
+            self.Rigbox.pack_forget()
+            self.Instruction1.pack_forget()
+            self.main_screen()
+
+    def main_screen(self):
+        self.screencontrol = True
         self.Spin_Button = Button(mastertk, text='Spin', activebackground="blue",
                                  activeforeground="blue", command=self.spin)
         self.Spin_Button.place(anchor=CENTER,relx=0.7,rely=0.4)
 
         self.Rigged = Button(mastertk, text="Settings",
-                           command=self.rigged)
+                           command=self.changescreen)
         self.Rigged.place(anchor=CENTER,relx=0.9,rely=0.9)
 
         self.Save = Button(mastertk, text="Save to History",
@@ -183,18 +213,30 @@ class Random_Number:
         self.front.place(anchor=CENTER,relx=0.55,rely=0.3)
         self.end = tk.Entry(mastertk, validate="key", validatecommand=(self.validation, '%P'), width=5)
         self.end.place(anchor=CENTER,relx=0.85,rely=0.3)
+        if self.frontnum != None:
+            self.front.insert(END,self.frontnum)
+        if self.endnum != None:
+            self.end.insert(END,self.endnum)
 
+    def get_current_values(self):
+        if self.front.get()!="":
+            self.frontnum = int(self.front.get())
+        if self.end.get()!="":
+            self.endnum = int(self.end.get())
 
     def spin(self):
-        if self.rigged == None:
-            frontnum = int(self.front.get())
-            endnum = int(self.end.get())
-            MyNum = str(random.randint(frontnum,endnum))
-            Numberlabel = Label(self.ResultFrame, text=MyNum)
+        if self.front.get()=="" or self.end.get()=="":
+            return
+        elif len(self.rigged)==0:
+            self.frontnum = int(self.front.get())
+            self.endnum = int(self.end.get())
+            self.MyNum = str(random.randint(self.frontnum, self.endnum))
+            Numberlabel = Label(self.ResultFrame, text=self.MyNum)
             Numberlabel.place(relx=0.5, rely=0.5, anchor=CENTER)
         else:
-            Mylabel = Label(mastertk, text=self.rigged)
-            Mylabel.place(relx=0.5, rely=0.5, anchor=CENTER)
+            myselection = random.choice(self.rigged)
+            Numberlabel = Label(self.ResultFrame, text=myselection)
+            Numberlabel.place(relx=0.5, rely=0.5, anchor=CENTER)
 
     def number_or_no(self,myint):
         if myint.isnumeric():
@@ -205,10 +247,40 @@ class Random_Number:
         else:
             return False
 
-    def rigged(self):
-        pass
+    def digitorcomma(self,myinput):
+        if len(myinput)==0:
+            return True
+        elif myinput[-1].isdigit() or (","==myinput[-1] and len(myinput)!=1 and myinput[-2]!=","):
+            return True
+        else:
+            return False
+
+    def rigfunction(self):
+        self.screencontrol = False
+        self.RangeLabel.place_forget()
+        self.front.place_forget()
+        self.end.place_forget()
+        self.ResultFrame.place_forget()
+        self.Spin_Button.place_forget()
+        self.Save.place_forget()
+        self.helplabel.place_forget()
+        self.ChosenLabel.place_forget()
+        self.Instruction1 = Label(mastertk, text="Enter rigged values in range, seperated by comma.")
+        self.Instruction1.pack()
+        self.validate_rig = mastertk.register(self.digitorcomma)
+        self.Rigbox = Entry(mastertk, width=32, validate="key",validatecommand=(self.validate_rig, '%P'))
+        self.Rigbox.pack()
+
+
+
     def history(self):
         print("not implemented yet")
+        #last chosen num
+        self.myNum
+        #last front
+        self.frontnum
+        #last end
+        self.endnum
         pass
 
 
@@ -235,9 +307,11 @@ class Generate_History:
 current_screen = 0
 def switch_screen(screen):
     global current_screen
+    if screen==current_screen==1:
+        pass
+    elif screen==1:
+        Random_Number().main_screen()
     current_screen = screen
-    if current_screen==1:
-        my_random = Random_Number()
 
 mastertk = Tk()
 
