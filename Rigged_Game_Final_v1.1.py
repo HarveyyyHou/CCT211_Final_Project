@@ -435,5 +435,6 @@ mastertk.config(menu=mastermenu)
 
 dice = Dice()
 dice.defaultscreen()
+namepicker = Name_Pick()
 
 mastertk.mainloop()
