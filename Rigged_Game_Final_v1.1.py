@@ -5,6 +5,7 @@ import tkinter.ttk as ttk
 from PIL import ImageTk, Image
 from random import choices
 import random
+import pandas as pd
 
 
 class Dice:
@@ -299,11 +300,18 @@ class Generate_History:
     '''
     Save the current settings in History via Panda
     '''
+def csv_display():
+    myfields = ['Game_Type', 'Rigged_Settings','Normal_Settings','Results']
+    myrecord = pd.read_csv('Game_History.csv',skipinitialspace=True, usecols=myfields)
+    Game_list = myrecord.Game_Type.tolist()
+    Rigged_list = myrecord.Game_Type.tolist()
+    Normal_list = myrecord.Normal_Setting.tolist()
+    Results_list = myrecord.Results.tolist()
 
 # Screen is 0 by default(which is dice)
 # current_screen is a global var that determines what screen the user is on
 # clicking on the buttons in the row changes to 0,1,2 respectively
-# 0 = dice, 1 = RNG, 2 = name picker
+# 0 = dice, 1 = RNG, 2 = name picker, 3=History
 current_screen = 0
 def switch_screen(screen):
     global current_screen
@@ -311,6 +319,8 @@ def switch_screen(screen):
         pass
     elif screen==1:
         Random_Number().main_screen()
+    if screen==3:
+        csv_display()
     current_screen = screen
 
 mastertk = Tk()
