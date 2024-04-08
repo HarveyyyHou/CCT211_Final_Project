@@ -150,6 +150,7 @@ class Dice:
             else:
                 mychoice = choices([1,2,3,4,5,6],listrignum)
                 self.changeimage(mychoice[0])
+                
 class Random_Number:
 
     "Randomly selects a Number"
@@ -236,6 +237,7 @@ class Random_Number:
             Numberlabel.place(relx=0.5, rely=0.5, anchor=CENTER)
         else:
             myselection = random.choice(self.rigged)
+            self.MyNum = myselection
             Numberlabel = Label(self.ResultFrame, text=myselection)
             Numberlabel.place(relx=0.5, rely=0.5, anchor=CENTER)
 
@@ -275,14 +277,9 @@ class Random_Number:
 
 
     def history(self):
-        print("not implemented yet")
-        #last chosen num
-        self.myNum
-        #last front
-        self.frontnum
-        #last end
-        self.endnum
-        pass
+        if self.MyNum!=None:
+            myhistory=Generate_History()
+            Generate_History.csv_write(myhistory,"RNG",self.rigged,str(self.frontnum)+"to"+str(self.endnum), self.MyNum)
 
 
 class Name_Pick:
@@ -392,21 +389,31 @@ class Name_Pick:
     def choose(self):
         pass
 
-class Rigged(tk.Frame):
-    def __init__(self):
-        pass
-
 class Generate_History:
     '''
     Save the current settings in History via Panda
     '''
-def csv_display():
-    myfields = ['Game_Type', 'Rigged_Settings','Normal_Settings','Results']
-    myrecord = pd.read_csv('Game_History.csv',skipinitialspace=True, usecols=myfields)
-    Game_list = myrecord.Game_Type.tolist()
-    Rigged_list = myrecord.Game_Type.tolist()
-    Normal_list = myrecord.Normal_Setting.tolist()
-    Results_list = myrecord.Results.tolist()
+
+    def __init__(self):
+        self.myfields = ['Game_Type', 'Rigged_Settings','Normal_Settings','Results']
+
+    def csv_write(self,GameType,SettingRig,SettingNormal,Result):
+        writedata = {'Game_Type':[GameType],
+                     'Rigged_Settings':[SettingRig],
+                     'Normal_Settings':[SettingNormal],
+                     'Results':[Result]
+                     }
+        mydataframe = pd.DataFrame(writedata)
+        mydataframe.to_csv('Game_History.csv',mode='a',index=False, header=False)
+
+
+    def csv_display(self):
+        self.myrecord = pd.read_csv('Game_History.csv', skipinitialspace=True, usecols=self.myfields)
+        Game_list = self.myrecord["Game_Type"].tolist()
+        Rigged_list = self.myrecord["Rigged_Settings"].tolist()
+        Normal_list = self.myrecord["Normal_Settings"].tolist()
+        Results_list = self.myrecord["Results"].tolist()
+
 
 # Screen is 0 by default(which is dice)
 # current_screen is a global var that determines what screen the user is on
