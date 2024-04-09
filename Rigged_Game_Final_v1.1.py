@@ -347,7 +347,7 @@ class Name_Pick:
 
     def open_settings_screen(self):
         self.get_main_screen_existing_values()
-        clear_frame(self)
+        self.clear_frame()
         self.add_settings_screen()
 
     def get_random_data(self):
