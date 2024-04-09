@@ -458,6 +458,7 @@ mastermenu = Menu(mastertk)
 mastermenu.add_cascade(label="Dice", command=lambda: switch_screen(0))
 mastermenu.add_cascade(label="Number_Generator", command=lambda: switch_screen(1))
 mastermenu.add_cascade(label="NamePicker", command=lambda: switch_screen(2))
+mastermenu.add_cascade(label="History", command=lambda: switch_screen(3))
 
 mastertk.geometry("300x300")
 mastertk.config(menu=mastermenu)
