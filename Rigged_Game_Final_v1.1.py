@@ -342,12 +342,12 @@ class Name_Pick:
 
     def open_main_screen(self):
         self.get_settings_screen_existing_values()
-        clear_frame()
+        self.clear_frame()
         self.add_main_screen()
 
     def open_settings_screen(self):
         self.get_main_screen_existing_values()
-        clear_frame()
+        self.clear_frame()
         self.add_settings_screen()
 
     def get_random_data(self):
@@ -398,10 +398,10 @@ class Generate_History:
         namepicker.open_main_screen()
 
     def open_dice_screen(self):  
-        clear_frame()
+        self.clear_frame()
 
 
-    def self.clear_frame(self):
+    def clear_frame(self):
         for contecnt in content_frame.winfo_children():
             contecnt.destroy()    
 
