@@ -394,16 +394,16 @@ class Generate_History:
     Save the current settings in History via Panda
     '''
 
-     def open_name_picker_screen():  
+    def open_name_picker_screen(self):  
         namepicker.open_main_screen()
 
-    def open_dice_screen():  
+    def open_dice_screen(self):  
         clear_frame()
 
 
-    def clear_frame():
-      for contecnt in content_frame.winfo_children():
-        contecnt.destroy()    
+    def clear_frame(self):
+        for contecnt in content_frame.winfo_children():
+            contecnt.destroy()    
 
     global mastertk
     global namepicker
