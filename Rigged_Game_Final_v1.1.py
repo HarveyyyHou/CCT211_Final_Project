@@ -116,7 +116,6 @@ class Dice:
                 listrignum.append(0)
                 #txtbox.config(bg = "blue")
             elif myentry.get() == "" or myentry.get() == '':
-                # print("!!!??")
                 myentry.insert(0,"0")
                 listrignum.append(0)
             #if there is a number in the textbox put the number in the list
@@ -131,10 +130,8 @@ class Dice:
         numcount = 0
 
             #if all the numbers are just 0 then it's an equal spin
-        # print(listrignum)
         #if the values are over 100 it is false and it if is below 0 it is false
         if countvalues > 100 or countvalues < 0:
-            # print('not good')
             validcheck = False
 
         numcount = 0
@@ -175,7 +172,8 @@ class Random_Number:
             entrytext = self.Rigbox.get()
             entrytext = entrytext.split(",")
             for myint in entrytext:
-                myint = int(myint)
+                if myint!='':
+                    myint = int(myint)
                 if self.front.get() == "" or self.end.get() == "":
                     break
                 elif int(self.front.get()) <= myint <= int(self.end.get()):
