@@ -448,7 +448,7 @@ def switch_screen(screen):
     elif screen==1:
         Random_Number().main_screen()
     if screen == 2:
-        pass
+        namepicker.add_main_screen()
     if screen==3:
         myhistory = Generate_History()
         myhistory.csv_display()
