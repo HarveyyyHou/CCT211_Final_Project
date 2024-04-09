@@ -413,6 +413,16 @@ class Generate_History:
         Rigged_list = self.myrecord["Rigged_Settings"].tolist()
         Normal_list = self.myrecord["Normal_Settings"].tolist()
         Results_list = self.myrecord["Results"].tolist()
+        treeView = ttk.Treeview(mastertk)
+        treeView.grid(columnspan=2)
+        treeView["columns"] = ["Game_Type", "Rigged_Settings","Normal_Settings","Results"]
+        treeView["show"] = "headings"
+        treeView.heading("Game_Type", text="Game Type")
+        treeView.heading("Rigged_Settings", text="Rigged Settings")
+        treeView.heading("Normal_Settings", text="Normal_Settings")
+        treeView.heading("Results", text="Results")
+        for i in range(len(Game_list)):
+            treeView.insert("", "end", values=(Game_list[i], Rigged_list[i], Normal_list[i], Results_list[i]))
 
 
 # Screen is 0 by default(which is dice)
@@ -440,7 +450,8 @@ def switch_screen(screen):
     if screen == 2:
         pass
     if screen==3:
-        csv_display()
+        myhistory = Generate_History()
+        myhistory.csv_display()
     current_screen = screen
 
 mastermenu = Menu(mastertk)
