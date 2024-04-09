@@ -303,7 +303,7 @@ class Name_Pick:
         self.label_rigged_names = None
         self.textbox_rigged_names = None
 
-     def add_main_screen(self):
+    def add_main_screen(self):
         self.label_names = tk.Label(content_frame, text=self.label_content, height=2, width=20)
         self.label_names.pack(pady=1)
         self.textbox_userinput = tk.Text(content_frame, height=10, width=150)
