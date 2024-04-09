@@ -389,11 +389,6 @@ class Name_Pick:
     def choose(self):
         pass
 
-class Generate_History:
-    '''
-    Save the current settings in History via Panda
-    '''
-
     def open_name_picker_screen(self):  
         namepicker.open_main_screen()
 
@@ -408,6 +403,11 @@ class Generate_History:
     global mastertk
     global namepicker
     global content_frame
+
+class Generate_History:
+    '''
+    Save the current settings in History via Panda
+    '''
 
     def __init__(self):
         self.myfields = ['Game_Type', 'Rigged_Settings','Normal_Settings','Results']
