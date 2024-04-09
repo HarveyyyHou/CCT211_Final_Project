@@ -182,8 +182,8 @@ class Random_Number:
                     self.rigged.append(myint)
                 else:
                     self.rigged = []
-            self.Rigbox.pack_forget()
-            self.Instruction1.pack_forget()
+            self.Rigbox.place_forget()
+            self.Instruction1.place_forget()
             self.main_screen()
 
     def main_screen(self):
@@ -269,10 +269,10 @@ class Random_Number:
         self.helplabel.place_forget()
         self.ChosenLabel.place_forget()
         self.Instruction1 = Label(mastertk, text="Enter rigged values in range, seperated by comma.")
-        self.Instruction1.pack()
+        self.Instruction1.place(relx=0.5,rely=0.4,anchor=CENTER)
         self.validate_rig = mastertk.register(self.digitorcomma)
         self.Rigbox = Entry(mastertk, width=32, validate="key",validatecommand=(self.validate_rig, '%P'))
-        self.Rigbox.pack()
+        self.Rigbox.place(relx=0.5,rely=0.6,anchor=CENTER)
 
 
 
