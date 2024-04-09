@@ -419,18 +419,29 @@ class Generate_History:
 # current_screen is a global var that determines what screen the user is on
 # clicking on the buttons in the row changes to 0,1,2 respectively
 # 0 = dice, 1 = RNG, 2 = name picker, 3=History
+mastertk = Tk()
+content_frame = Frame(mastertk)
 current_screen = 0
+
 def switch_screen(screen):
+    global content_frame
     global current_screen
+
+    content_frame.destroy()
+    content_frame = Frame(mastertk)
+    content_frame.pack(fill='both', expand=True)
+
+    if screen == 0:
+        dice.defaultscreen()
     if screen==current_screen==1:
         pass
     elif screen==1:
         Random_Number().main_screen()
+    if screen == 2:
+        pass
     if screen==3:
         csv_display()
     current_screen = screen
-
-mastertk = Tk()
 
 mastermenu = Menu(mastertk)
 mastermenu.add_cascade(label="Dice", command=lambda: switch_screen(0))
