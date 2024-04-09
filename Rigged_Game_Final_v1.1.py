@@ -401,7 +401,7 @@ class Generate_History:
         clear_frame()
 
 
-    def clear_frame(self):
+    def self.clear_frame(self):
         for contecnt in content_frame.winfo_children():
             contecnt.destroy()    
 
