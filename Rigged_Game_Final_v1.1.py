@@ -389,6 +389,21 @@ class Name_Pick:
     def choose(self):
         pass
 
+    def open_name_picker_screen():  
+        namepicker.open_main_screen()
+
+    def open_dice_screen():  
+        clear_frame()
+
+
+    def clear_frame():
+      for contecnt in content_frame.winfo_children():
+        contecnt.destroy()    
+
+    global mastertk
+    global namepicker
+    global content_frame
+
 class Generate_History:
     '''
     Save the current settings in History via Panda
