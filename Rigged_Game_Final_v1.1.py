@@ -414,7 +414,7 @@ class Generate_History:
         Normal_list = self.myrecord["Normal_Settings"].tolist()
         Results_list = self.myrecord["Results"].tolist()
         treeView = ttk.Treeview(mastertk)
-        treeView.grid(columnspan=2)
+        treeView.pack()
         treeView["columns"] = ["Game_Type", "Rigged_Settings","Normal_Settings","Results"]
         treeView["show"] = "headings"
         treeView.heading("Game_Type", text="Game Type")
